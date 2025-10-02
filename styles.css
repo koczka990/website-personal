@@ -68,13 +68,14 @@
     --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: 600ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-}
+
 
 /* Dark mode variables */
 [data-theme="dark"] {
     --bg-primary: var(--bg-primary-dark);
     --bg-secondary: var(--bg-secondary-dark);
     --bg-tertiary: var(--bg-tertiary-dark);
+    --bg-accent: #3a323a;
     --text-primary: var(--text-primary-dark);
     --text-secondary: var(--text-secondary-dark);
     --text-muted: var(--text-muted-dark);
@@ -82,6 +83,14 @@
     --shadow-light: var(--shadow-dark);
     --shadow-medium: var(--shadow-dark);
     --shadow-large: var(--shadow-dark);
+    --shadow-soft: 0 2px 8px 0 rgba(0, 0, 0, 0.4);
+    
+    /* Dark mode accent colors - muted pastels */
+    --accent-primary: #b8888a;
+    --accent-secondary: #7eb09c;
+    --accent-tertiary: #8fa4c7;
+    --accent-warm: #d4a885;
+    --accent-hover: #a67375;
 }
 
 /* Reset */
@@ -100,10 +109,20 @@ body {
     font-size: var(--font-size-base);
     line-height: 1.7;
     color: var(--text-primary);
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
-    background-attachment: fixed;
+    background: var(--bg-primary);
     transition: background var(--transition-medium), color var(--transition-medium);
     position: relative;
+}
+
+/* Dark mode specific body styling */
+[data-theme="dark"] body {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
+/* Light mode specific body styling */
+[data-theme="light"] body,
+body:not([data-theme]) {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
 }
 
 /* Subtle texture overlay */
@@ -120,6 +139,13 @@ body::before {
     pointer-events: none;
     z-index: -1;
     opacity: 0.3;
+}
+
+/* Dark mode texture overlay */
+[data-theme="dark"] body::before {
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(184, 136, 138, 0.15) 1px, transparent 0);
+    opacity: 0.2;
 }
 
 /* Container */
@@ -352,6 +378,11 @@ p {
     background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-accent) 50%, var(--bg-secondary) 100%);
 }
 
+/* Dark mode hero background */
+[data-theme="dark"] .hero {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-accent) 50%, var(--bg-secondary) 100%);
+}
+
 .hero-background {
     position: absolute;
     top: 0;
@@ -536,6 +567,11 @@ section {
     position: relative;
 }
 
+/* Dark mode about section */
+[data-theme="dark"] .about {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+}
+
 .about::before {
     content: '';
     position: absolute;
@@ -676,6 +712,11 @@ section {
     position: relative;
 }
 
+/* Dark mode experience section */
+[data-theme="dark"] .experience {
+    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+}
+
 .timeline {
     position: relative;
     max-width: 1000px;
@@ -807,6 +848,11 @@ section {
     position: relative;
 }
 
+/* Dark mode education section */
+[data-theme="dark"] .education {
+    background: linear-gradient(135deg, var(--bg-tertiary) 0%, var(--bg-accent) 100%);
+}
+
 .education::before {
     content: '';
     position: absolute;
@@ -824,6 +870,17 @@ section {
     background-size: 60px 60px;
     opacity: 0.5;
     pointer-events: none;
+}
+
+/* Dark mode education pattern */
+[data-theme="dark"] .education::before {
+    background-image: 
+        repeating-conic-gradient(
+            from 0deg at 50% 50%,
+            transparent 0deg,
+            rgba(143, 164, 199, 0.1) 10deg,
+            transparent 20deg
+        );
 }
 
 .education-grid {
@@ -922,6 +979,11 @@ section {
     position: relative;
 }
 
+/* Dark mode skills section */
+[data-theme="dark"] .skills {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-accent) 100%);
+}
+
 .skills::before {
     content: '';
     position: absolute;
@@ -933,6 +995,12 @@ section {
         linear-gradient(45deg, transparent 40%, rgba(181, 199, 232, 0.1) 50%, transparent 60%);
     background-size: 30px 30px;
     pointer-events: none;
+}
+
+/* Dark mode skills pattern */
+[data-theme="dark"] .skills::before {
+    background-image: 
+        linear-gradient(45deg, transparent 40%, rgba(143, 164, 199, 0.1) 50%, transparent 60%);
 }
 
 .skills-grid {
@@ -1037,6 +1105,11 @@ section {
     position: relative;
 }
 
+/* Dark mode projects section */
+[data-theme="dark"] .projects {
+    background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-secondary) 100%);
+}
+
 .projects::before {
     content: '';
     position: absolute;
@@ -1053,6 +1126,18 @@ section {
             rgba(242, 212, 167, 0.1) 20px
         );
     pointer-events: none;
+}
+
+/* Dark mode projects pattern */
+[data-theme="dark"] .projects::before {
+    background-image: 
+        repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 10px,
+            rgba(212, 168, 133, 0.1) 10px,
+            rgba(212, 168, 133, 0.1) 20px
+        );
 }
 
 .projects-grid {
@@ -1147,6 +1232,11 @@ section {
     position: relative;
 }
 
+/* Dark mode awards section */
+[data-theme="dark"] .awards {
+    background: linear-gradient(135deg, var(--bg-accent) 0%, var(--bg-primary) 100%);
+}
+
 .awards::before {
     content: '';
     position: absolute;
@@ -1158,6 +1248,13 @@ section {
         radial-gradient(circle at 30% 30%, rgba(242, 212, 167, 0.2) 0%, transparent 30%),
         radial-gradient(circle at 70% 70%, rgba(212, 165, 167, 0.2) 0%, transparent 30%);
     pointer-events: none;
+}
+
+/* Dark mode awards patterns */
+[data-theme="dark"] .awards::before {
+    background: 
+        radial-gradient(circle at 30% 30%, rgba(212, 168, 133, 0.2) 0%, transparent 30%),
+        radial-gradient(circle at 70% 70%, rgba(184, 136, 138, 0.2) 0%, transparent 30%);
 }
 
 .awards-content {
@@ -1237,6 +1334,11 @@ section {
     position: relative;
 }
 
+/* Dark mode contact section */
+[data-theme="dark"] .contact {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+}
+
 .contact::before {
     content: '';
     position: absolute;
@@ -1247,6 +1349,12 @@ section {
     background: radial-gradient(circle at 20% 80%, rgba(212, 165, 167, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 20%, rgba(168, 212, 193, 0.1) 0%, transparent 50%);
     pointer-events: none;
+}
+
+/* Dark mode contact patterns */
+[data-theme="dark"] .contact::before {
+    background: radial-gradient(circle at 20% 80%, rgba(184, 136, 138, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(126, 176, 156, 0.1) 0%, transparent 50%);
 }
 
 .contact-content {

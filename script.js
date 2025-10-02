@@ -21,7 +21,9 @@ function initThemeToggle() {
         const currentTheme = document.documentElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
+        // Apply theme to both html and body
         document.documentElement.setAttribute('data-theme', newTheme);
+        document.body.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         
         // Update icon
@@ -32,10 +34,12 @@ function initThemeToggle() {
         }
         
         // Add smooth transition effect
-        document.body.style.transition = 'background-color 0.3s ease, color 0.3s ease';
+        document.body.style.transition = 'background 0.5s ease, color 0.5s ease';
         setTimeout(() => {
             document.body.style.transition = '';
-        }, 300);
+        }, 500);
+        
+        console.log('Switched to theme:', newTheme); // Debug log
     });
 }
 
@@ -44,13 +48,17 @@ function applySavedTheme() {
     const themeToggle = document.getElementById('theme-toggle');
     const themeIcon = themeToggle.querySelector('i');
     
+    // Ensure the theme is applied to both html and body
     document.documentElement.setAttribute('data-theme', savedTheme);
+    document.body.setAttribute('data-theme', savedTheme);
     
     if (savedTheme === 'dark') {
         themeIcon.className = 'fas fa-sun';
     } else {
         themeIcon.className = 'fas fa-moon';
     }
+    
+    console.log('Applied theme:', savedTheme); // Debug log
 }
 
 // Scroll Animations
